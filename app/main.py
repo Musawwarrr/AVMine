@@ -1,4 +1,4 @@
-"""Downlink - local video & audio downloader.
+"""AVMine - video & audio downloader.
 
 A tiny FastAPI app that serves the UI and wraps yt-dlp. Bound to 127.0.0.1
 only; nothing is exposed to the network.
@@ -26,7 +26,7 @@ from pydantic import BaseModel
 import downloader
 import store
 
-APP_NAME = "Downlink"
+APP_NAME = "AVMine"
 APP_VERSION = "1.0.0"
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -142,7 +142,7 @@ def _preview(url: str) -> dict:
     if downloader.yt_dlp is None:
         raise HTTPException(status_code=503, detail={
             "message": "yt-dlp is not installed.",
-            "hint": "Close Downlink and run the launcher again to finish setup.",
+            "hint": "Close AVMine and run the launcher again to finish setup.",
         })
 
     settings = store.load_settings()
@@ -295,7 +295,7 @@ def start_download(payload: DownloadRequest) -> dict:
     if not _ffmpeg_info()["found"]:
         raise HTTPException(status_code=503, detail={
             "message": "ffmpeg wasn't found on this PC.",
-            "hint": "Install ffmpeg and make sure it's on PATH, then restart Downlink.",
+            "hint": "Install ffmpeg and make sure it's on PATH, then restart AVMine.",
         })
 
     options = {
@@ -427,7 +427,7 @@ def pick_folder() -> dict:
     script = f"""
 Add-Type -AssemblyName System.Windows.Forms | Out-Null
 $dialog = New-Object System.Windows.Forms.FolderBrowserDialog
-$dialog.Description = 'Choose where Downlink saves files'
+$dialog.Description = 'Choose where AVMine saves files'
 $dialog.SelectedPath = '{current}'
 $dialog.ShowNewFolderButton = $true
 $owner = New-Object System.Windows.Forms.Form
@@ -567,7 +567,7 @@ def main() -> None:
     print("  Close this window (or press Ctrl+C) to quit.")
     print("")
 
-    if not os.environ.get("DOWNLINK_NO_BROWSER"):
+    if not os.environ.get("AVMINE_NO_BROWSER"):
         threading.Timer(1.2, lambda: webbrowser.open(url)).start()
 
     import uvicorn

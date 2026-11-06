@@ -1,6 +1,6 @@
 'use strict';
 
-/* AV Mine — front-end controller */
+/* AVMine — front-end controller */
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
@@ -34,7 +34,7 @@ const TOAST_TYPES = {
   success: { icon: 'check', title: 'Done' },
   error: { icon: 'alert', title: 'Something went wrong' },
   warn: { icon: 'alert', title: 'Heads up' },
-  info: { icon: 'info', title: 'AV Mine' },
+  info: { icon: 'info', title: 'AVMine' },
 };
 
 /* ------------------------------------------------------------------ helpers */
@@ -77,8 +77,8 @@ async function api(path, options = {}) {
     response = await fetch(path, config);
   } catch (error) {
     if (error.name === 'AbortError') throw error;
-    const offline = new Error('Could not reach AV Mine. Is the app still running?');
-    offline.hint = 'Check the AV Mine console window, then reload this page.';
+    const offline = new Error('Could not reach AVMine. Is the app still running?');
+    offline.hint = 'Check the AVMine console window, then reload this page.';
     throw offline;
   }
 
@@ -335,7 +335,7 @@ async function loadHealth() {
       dot.classList.add('is-good');
       $('#versionPill').title = `ffmpeg ready · ${health.ffmpeg.path || 'PATH'}`;
     }
-    $('#footerVersion').textContent = `AV Mine ${health.version}`;
+    $('#footerVersion').textContent = `AVMine ${health.version}`;
 
     $('#ytdlpVersion').textContent = health.ytdlp;
     const ffmpeg = health.ffmpeg || {};

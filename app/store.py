@@ -1,4 +1,4 @@
-"""Settings and history persistence for Downlink.
+"""Settings and history persistence for AVMine.
 
 Everything is stored as plain JSON next to the app so it is easy to inspect,
 back up, or delete. Writes are atomic to survive a hard shutdown mid-save.
@@ -17,7 +17,7 @@ SETTINGS_FILE = DATA_DIR / "settings.json"
 HISTORY_FILE = DATA_DIR / "history.json"
 
 DEFAULT_TEMPLATE = "%(title)s.%(ext)s"
-DEFAULT_DOWNLOAD_DIR = Path.home() / "Downloads" / "Downlink"
+DEFAULT_DOWNLOAD_DIR = Path.home() / "Downloads" / "AVMine"
 
 DEFAULTS: dict = {
     "download_dir": str(DEFAULT_DOWNLOAD_DIR),

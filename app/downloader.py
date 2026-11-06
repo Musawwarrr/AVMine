@@ -171,7 +171,7 @@ class JobManager:
     def _ensure_worker_locked(self) -> None:
         if self._worker is None or not self._worker.is_alive():
             self._worker = threading.Thread(target=self._worker_loop, daemon=True,
-                                            name="downlink-worker")
+                                            name="avmine-worker")
             self._worker.start()
 
     def _prune_locked(self) -> None:

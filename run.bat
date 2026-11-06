@@ -1,7 +1,7 @@
 @echo off
 setlocal
 cd /d "%~dp0"
-title Downlink
+title AVMine
 
 where python >nul 2>nul
 if errorlevel 1 (
@@ -16,7 +16,7 @@ if errorlevel 1 (
 
 if not exist ".venv\Scripts\python.exe" (
   echo.
-  echo   First run - setting up Downlink, this takes about a minute...
+  echo   First run - setting up AVMine, this takes about a minute...
   echo.
   python -m venv .venv
   if errorlevel 1 goto :fail
@@ -30,7 +30,7 @@ if not exist ".venv\Scripts\python.exe" (
 ".venv\Scripts\python.exe" app\main.py
 if errorlevel 1 (
   echo.
-  echo   Downlink stopped with an error. See the messages above.
+  echo   AVMine stopped with an error. See the messages above.
   pause
 )
 exit /b 0

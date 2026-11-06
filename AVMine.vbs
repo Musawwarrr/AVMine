@@ -1,4 +1,4 @@
-' Starts Downlink without a persistent console window.
+' Starts AVMine without a persistent console window.
 ' If you need to stop it, use Task Manager or run run.bat instead.
 Set shell = CreateObject("WScript.Shell")
 Set fso = CreateObject("Scripting.FileSystemObject")

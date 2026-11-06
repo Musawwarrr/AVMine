@@ -1,11 +1,12 @@
-# Downlink
+# AVMine
 
-A clean, local video & audio downloader for Windows. Paste a link, pick a format,
-and let it run — no terminal commands, no accounts, no cloud.
+A video & audio downloader for Windows.
 
-Under the hood it uses [yt-dlp](https://github.com/yt-dlp/yt-dlp) and
+It uses [yt-dlp](https://github.com/yt-dlp/yt-dlp) and
 [ffmpeg](https://ffmpeg.org/). The interface is a tiny local web app that opens in
 your browser and talks to a Python server running only on `127.0.0.1`.
+
+I have themed it with Avatar the Last Airbender's color palette just cause I love the show. 
 
 ---
 
@@ -16,12 +17,11 @@ your browser and talks to a Python server running only on `127.0.0.1`.
    dependencies (about a minute).
 3. Your browser opens **http://127.0.0.1:8765** automatically.
 
-Keep the console window open while you use Downlink. Closing it stops the app.
-If you'd rather not see the console, double-click **`Downlink.vbs`** instead
+Keep the console window open while you use AVMine. Closing it stops the app.
+If you'd rather not see the console, double-click **`AVMine.vbs`** instead
 (it launches hidden; stop it from Task Manager).
 
-**Requirements:** Windows 10/11, Python 3.10+, and ffmpeg on your `PATH`
-(already present on this PC at `C:\ffmpeg\bin\ffmpeg.exe`).
+**Requirements:** Windows 10/11, Python 3.10+, and ffmpeg on your `PATH`.
 
 ---
 
@@ -42,15 +42,6 @@ If you'd rather not see the console, double-click **`Downlink.vbs`** instead
 - **Browser cookies** — needed for private, age-restricted, or members-only videos.
 - **One-click yt-dlp updates** — sites change constantly; update from Settings.
 
-### Handy shortcuts
-
-| Shortcut | Action |
-| --- | --- |
-| `Ctrl` + `K` | Focus the link box |
-| `Enter` | Start downloading |
-| `Shift` + `Enter` | New line in the link box |
-| `Ctrl` + `,` | Open settings |
-| `Esc` | Close a dialog or menu |
 
 ---
 
@@ -58,7 +49,7 @@ If you'd rather not see the console, double-click **`Downlink.vbs`** instead
 
 | What | Where |
 | --- | --- |
-| Downloaded files | `C:\Users\<you>\Downloads\Downlink` (change in Settings) |
+| Downloaded files | `C:\Users\<you>\Downloads\AVMine` (change in Settings) |
 | Settings | `data\settings.json` |
 | History | `data\history.json` |
 | Cache | `data\cache` |
@@ -86,52 +77,7 @@ Close that browser first if Windows has the cookie database locked.
 containing `ffmpeg.exe`, or at the executable itself.
 
 **Updating yt-dlp** — sites break extractors regularly. Use
-Settings → Update, then close and reopen Downlink so the new version loads.
+Settings → Update, then close and reopen AVMine so the new version loads.
 YouTube issues are almost always fixed by an update.
 
----
 
-## Troubleshooting
-
-| Symptom | Fix |
-| --- | --- |
-| *"Sign in to confirm you're not a bot"* | Settings → Cookies from browser → pick your browser. |
-| Video is 403 / unavailable | Update yt-dlp, then retry. |
-| "ffmpeg wasn't found" | Install ffmpeg or set its path in Settings. |
-| Requested quality unavailable | Pick "Best available" instead of a fixed resolution. |
-| Nothing happens / page won't load | Check the console window for errors; the port may be in use (Downlink automatically tries 8765–8804). |
-| Private or members-only video fails | Cookies from a signed-in browser, and make sure that account has access. |
-| Partial file left after cancel | Partial `.part` files are cleaned up automatically; if one remains, delete it manually. |
-
-If the UI gets into a strange state, close the console window and run `run.bat`
-again. Your history and files are preserved.
-
-To reset all settings, delete `data\settings.json`. Downloading works with the
-defaults immediately after.
-
----
-
-## Project layout
-
-```
-run.bat               One-click launcher (creates .venv on first run)
-Downlink.vbs          Hidden-console launcher
-requirements.txt      fastapi, uvicorn, yt-dlp
-app/
-  main.py             FastAPI server + API endpoints
-  downloader.py       Job queue, yt-dlp options, progress hooks
-  store.py            Settings + history persistence
-  static/
-    index.html        UI markup
-    styles.css        Theme and layout
-    app.js            Front-end controller
-data/                 Created at runtime (settings, history, cache)
-```
-
-The server binds to `127.0.0.1` only, so nothing is exposed to your network.
-No telemetry, no accounts, no background services — closing the console stops
-everything.
-
----
-
-Use it for content you have the right to download.
