@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>AV Mine · audio &amp; video downloader</title>
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 21v-7"/><path d="M4 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M20 21v-5"/><path d="M20 12V3"/><path d="M1 14h6"/><path d="M9 8h6"/><path d="M17 16h6"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-folder-open" viewBox="0 0 24 24"><path d="M6 14l1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h5a2 2 0 0 1 2 2v2"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M8 16H3v5"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="m6 3 14 9-14 9z"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></symbol>
+  <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15Z"/><path d="M5 15l.9 2.1L8 18l-2.1.9L5 21l-.9-2.1L2 18l2.1-.9L5 15Z"/></symbol>
+  <symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2Z"/><path d="M14 2v6h6"/></symbol>
+</svg>
+
+<div class="orb orb--violet" aria-hidden="true"></div>
+<div class="orb orb--cyan" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark"><img src="logo.svg" alt="AV Mine logo" class="brand-logo"></div>
+      <div class="brand-text">
+        <span class="brand-name">AV Mine</span>
+        <span class="brand-sub">audio &amp; video downloader.</span>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <div class="status-pill" id="versionPill" role="status" title="System status">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="versionText">checking…</span>
+      </div>
+      <button class="icon-btn" id="settingsBtn" title="Settings (Ctrl+,)" aria-label="Settings">
+        <svg class="icon"><use href="#i-settings"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Paste a link.<span class="grad"> Keep the media.</span></h1>
+    </section>
+
+    <section class="composer card">
+      <div class="url-field" id="urlField">
+        <svg class="icon url-icon"><use href="#i-link"/></svg>
+        <textarea id="urlInput" rows="1" spellcheck="false" autocomplete="off"
+                  placeholder="Paste a YouTube link or any supported URL…"></textarea>
+        <button class="icon-btn ghost" id="pasteBtn" title="Paste from clipboard" aria-label="Paste">
+          <svg class="icon"><use href="#i-clipboard"/></svg>
+        </button>
+      </div>
+
+      <div class="composer-row">
+        <div class="segmented" id="modeToggle" role="group" aria-label="Download type">
+          <button class="seg is-active" data-mode="video" type="button">
+            <svg class="icon"><use href="#i-video"/></svg> Video
+          </button>
+          <button class="seg" data-mode="audio" type="button">
+            <svg class="icon"><use href="#i-music"/></svg> Audio
+          </button>
+        </div>
+
+        <div class="select-group" id="videoOptions">
+          <label class="select-wrap">
+            <span class="select-label">Quality</span>
+            <select id="videoQuality">
+              <option value="best">Best available</option>
+              <option value="2160">4K · 2160p</option>
+              <option value="1440">1440p</option>
+              <option value="1080" selected>1080p</option>
+              <option value="720">720p</option>
+              <option value="480">480p</option>
+              <option value="360">360p</option>
+            </select>
+            <svg class="icon chevron"><use href="#i-chevron-down"/></svg>
+          </label>
+        </div>
+
+        <div class="select-group is-hidden" id="audioOptions">
+          <label class="select-wrap">
+            <span class="select-label">Format</span>
+            <select id="audioFormat">
+              <option value="mp3" selected>MP3</option>
+              <option value="m4a">M4A</option>
+              <option value="opus">Opus</option>
+              <option value="wav">WAV</option>
+            </select>
+            <svg class="icon chevron"><use href="#i-chevron-down"/></svg>
+          </label>
+          <label class="select-wrap" id="bitrateWrap">
+            <span class="select-label">Bitrate</span>
+            <select id="audioQuality">
+              <option value="320" selected>320 kbps</option>
+              <option value="256">256 kbps</option>
+              <option value="192">192 kbps</option>
+              <option value="128">128 kbps</option>
+            </select>
+            <svg class="icon chevron"><use href="#i-chevron-down"/></svg>
+          </label>
+        </div>
+      </div>
+
+      <div class="composer-foot">
+        <div class="chips">
+          <button class="chip folder-chip" id="folderChip" type="button" title="Change download folder">
+            <svg class="icon"><use href="#i-folder"/></svg>
+            <span id="folderName">Downloads/AV Mine</span>
+          </button>
+        </div>
+        <button class="btn primary" id="downloadBtn" type="button">
+          <svg class="icon"><use href="#i-download"/></svg>
+          <span id="downloadLabel">Download</span>
+        </button>
+      </div>
+    </section>
+
+    <section id="previewSection" class="is-hidden" aria-live="polite">
+      <div class="preview card" id="previewCard"></div>
+    </section>
+
+    <section id="queueSection" class="is-hidden">
+      <div class="section-head">
+        <h2>Downloads <span class="count" id="queueCount">0</span></h2>
+      </div>
+      <div id="queueList" class="job-list"></div>
+    </section>
+
+    <section class="library">
+      <div class="section-head">
+        <h2>Library <span class="count" id="historyCount">0</span></h2>
+        <div class="library-actions">
+          <div class="search">
+            <svg class="icon"><use href="#i-search"/></svg>
+            <input id="searchInput" type="search" placeholder="Search downloads" autocomplete="off">
+          </div>
+          <div class="filter-chips" id="filterChips">
+            <button class="filter is-active" data-filter="all" type="button">All</button>
+            <button class="filter" data-filter="video" type="button">Video</button>
+            <button class="filter" data-filter="audio" type="button">Audio</button>
+          </div>
+          <button class="icon-btn" id="openFolderBtn" title="Open download folder" aria-label="Open download folder">
+            <svg class="icon"><use href="#i-folder-open"/></svg>
+          </button>
+          <button class="icon-btn" id="historyMenuBtn" title="Library options" aria-label="Library options">
+            <svg class="icon"><use href="#i-more"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="historyList" class="history-list"></div>
+      <div id="emptyState" class="empty">
+        <div class="empty-icon"><svg class="icon"><use href="#i-download"/></svg></div>
+        <p class="empty-title">Nothing here yet</p>
+        <p class="empty-sub">Paste a link above and your downloads will collect here.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span></span>
+    <span id="footerVersion">AV Mine</span>
+    <span class="footer-spacer"></span>
+    <span class="kbd-hint"><kbd>Ctrl</kbd><kbd>K</kbd> to focus · <kbd>Enter</kbd> to download</span>
+  </footer>
+</div>
+
+<!-- Settings -->
+<div class="modal-backdrop is-hidden" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+  <div class="modal">
+    <header class="modal-head">
+      <div>
+        <h2 id="settingsTitle">Settings</h2>
+        <p class="modal-sub">Changes apply to new downloads.</p>
+      </div>
+      <button class="icon-btn" data-close="settingsModal" aria-label="Close settings">
+        <svg class="icon"><use href="#i-x"/></svg>
+      </button>
+    </header>
+
+    <div class="modal-body">
+      <div class="settings-group">
+        <h3>Downloads</h3>
+
+        <div class="field">
+          <label for="setFolder">Save files to</label>
+          <div class="input-row">
+            <input id="setFolder" type="text" spellcheck="false" autocomplete="off">
+            <button class="btn subtle" id="browseBtn" type="button">
+              <svg class="icon"><use href="#i-folder"/></svg> Browse
+            </button>
+          </div>
+          <p class="hint">The folder is created automatically if it doesn't exist.</p>
+        </div>
+
+        <div class="field">
+          <label for="setTemplate">Filename template <span class="advanced">advanced</span></label>
+          <div class="input-row">
+            <input id="setTemplate" type="text" spellcheck="false" autocomplete="off">
+            <button class="btn subtle" id="resetTemplateBtn" type="button">Reset</button>
+          </div>
+          <p class="hint">Tokens: <code>%(title)s</code>, <code>%(uploader)s</code>, <code>%(ext)s</code>, <code>%(id)s</code></p>
+        </div>
+
+        <label class="switch-row">
+          <span class="switch-text">
+            <strong>Embed cover art</strong>
+            <small>Adds the thumbnail as cover art to audio files</small>
+          </span>
+          <input type="checkbox" id="setEmbedThumb">
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+
+        <label class="switch-row">
+          <span class="switch-text">
+            <strong>Embed metadata</strong>
+            <small>Title, artist, and source details in the file</small>
+          </span>
+          <input type="checkbox" id="setEmbedMeta">
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+      </div>
+
+      <div class="settings-group">
+        <h3>Defaults</h3>
+
+        <label class="switch-row">
+          <span class="switch-text">
+            <strong>Whole playlist by default</strong>
+            <small>Turn off to grab just the linked video</small>
+          </span>
+          <input type="checkbox" id="setPlaylist">
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+
+        <label class="switch-row">
+          <span class="switch-text">
+            <strong>Skip sponsor segments</strong>
+            <small>Uses SponsorBlock to cut sponsored sections</small>
+          </span>
+          <input type="checkbox" id="setSponsor">
+          <span class="switch" aria-hidden="true"></span>
+        </label>
+
+        <div class="field">
+          <label for="setCookies">Cookies from browser</label>
+          <div class="select-wrap wide">
+            <select id="setCookies">
+              <option value="">None — use for public videos</option>
+              <option value="chrome">Chrome</option>
+              <option value="edge">Edge</option>
+              <option value="firefox">Firefox</option>
+              <option value="brave">Brave</option>
+              <option value="opera">Opera</option>
+              <option value="vivaldi">Vivaldi</option>
+              <option value="chromium">Chromium</option>
+              <option value="safari">Safari</option>
+            </select>
+            <svg class="icon chevron"><use href="#i-chevron-down"/></svg>
+          </div>
+          <p class="hint">Needed for private, age-restricted, or members-only videos. Close the browser
+            before downloading if Windows locks its cookie database.</p>
+        </div>
+
+        <div class="field">
+          <label for="setFfmpeg">ffmpeg path <span class="advanced">optional</span></label>
+          <input id="setFfmpeg" type="text" spellcheck="false" autocomplete="off"
+                 placeholder="Auto-detect from PATH">
+          <p class="hint">Set this if ffmpeg is installed somewhere AV Mine can't find.</p>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <h3>System</h3>
+
+        <div class="system-row">
+          <div class="system-info">
+            <span class="system-name">yt-dlp</span>
+            <span class="system-version" id="ytdlpVersion">checking…</span>
+          </div>
+          <button class="btn subtle" id="updateBtn" type="button">
+            <svg class="icon"><use href="#i-refresh"/></svg> Update
+          </button>
+        </div>
+
+        <div class="system-row">
+          <div class="system-info">
+            <span class="system-name">ffmpeg</span>
+            <span class="system-version" id="ffmpegVersion">checking…</span>
+          </div>
+          <span class="badge" id="ffmpegBadge">—</span>
+        </div>
+
+        <div class="system-row">
+          <div class="system-info">
+            <span class="system-name">App data</span>
+            <span class="system-version">Settings, history, and cache</span>
+          </div>
+          <button class="btn subtle" id="dataFolderBtn" type="button">
+            <svg class="icon"><use href="#i-folder-open"/></svg> Open
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="modal-foot">
+      <span></span>
+      <div class="modal-actions">
+        <button class="btn ghost" data-close="settingsModal" type="button">Cancel</button>
+        <button class="btn primary" id="saveSettingsBtn" type="button">Save changes</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- Confirm -->
+<div class="modal-backdrop is-hidden" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+  <div class="modal modal--small">
+    <div class="confirm-body">
+      <div class="confirm-icon" id="confirmIcon"><svg class="icon"><use href="#i-alert"/></svg></div>
+      <div>
+        <h2 id="confirmTitle">Are you sure?</h2>
+        <p class="confirm-message" id="confirmMessage"></p>
+      </div>
+    </div>
+    <footer class="modal-foot">
+      <span class="modal-note"></span>
+      <div class="modal-actions">
+        <button class="btn ghost" id="confirmCancel" type="button">Cancel</button>
+        <button class="btn danger" id="confirmOk" type="button">Confirm</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<div class="menu is-hidden" id="contextMenu" role="menu"></div>
+<div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
